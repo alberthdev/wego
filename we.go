@@ -394,7 +394,7 @@ func formatWind(c cond) string {
 		if config.Imperial {
 			spdUnit = float32(spd) / 1.609
 		}
-		return fmt.Sprintf("\033[1m\033[38;5;%03dm%d\033[0m", col, int32(spdUnit))
+		return fmt.Sprintf("\033[38;5;%03dm%d", col, int32(spdUnit))
 	}
 	if c.WindGustKmph > c.WindspeedKmph {
 		return fmt.Sprintf("%s %s – %s %s     ", windDir[c.Winddir16Point], color(c.WindspeedKmph), color(c.WindGustKmph), unitWind[config.Imperial])[:57]
@@ -407,7 +407,7 @@ func formatVisibility(c cond) string {
 	if config.Imperial {
 		distUnit = float32(c.VisibleDistKM) * 0.621
 	}
-	return fmt.Sprintf("\033[1m%d %s\033[0m            ", int32(distUnit), unitVis[config.Imperial])[:15]
+	return fmt.Sprintf("%d %s            ", int32(distUnit), unitVis[config.Imperial])[:15]
 }
 
 func formatRain(c cond) string {
@@ -418,7 +418,7 @@ func formatRain(c cond) string {
 	if c.ChanceOfRain != "" {
 		return fmt.Sprintf("%.1f %s | %s%%        ", rainUnit, unitRain[config.Imperial], c.ChanceOfRain)[:15]
 	}
-	return fmt.Sprintf("\033[1m%.1f %s\033[0m            ", rainUnit, unitRain[config.Imperial])[:15]
+	return fmt.Sprintf("%.1f %s            ", rainUnit, unitRain[config.Imperial])[:15]
 }
 
 func formatCond(cur []string, c cond, current bool) (ret []string) {
